@@ -10,7 +10,7 @@ size = Vector2(64, 64)
 script = ExtResource("1_oetcv")
 
 [node name="HighlightTileMapLayer" type="TileMapLayer" parent="."]
-modulate = Color(1, 1, 1, 0.486275)
+modulate = Color(1, 1, 1, 0.478431)
 tile_set = ExtResource("2_8gl76")
 
 [node name="Cursor" type="Sprite2D" parent="."]
