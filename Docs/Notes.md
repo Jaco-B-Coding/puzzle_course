@@ -9,3 +9,6 @@
   ![alt text](image.png)
 
 - A **HashSet** is a data structure wherein each elemetn of the HashSet is going to be unique (for example Vector2)... If one adds same HashSet ( for example one occupied set as a Vector2) it won't add a same one if it included again 
+
+- Switching e.g. Main Node (where we would add all level resources) from Node2D (which has positional arguments) to a simple Node type, helps to avoid the accidental movement of the whole level positioning. Main is so used as common ancestor for each child nodes, therefore it deosn't need positional data
+
