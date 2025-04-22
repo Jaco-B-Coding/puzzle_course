@@ -8,7 +8,7 @@ namespace Game.Manager;
 
 public partial class GridManager : Node
 {
-	private HashSet<Vector2> occupiedCells = new(); 								// or new HashSet<Vector2>
+	private HashSet<Vector2I> occupiedCells = new(); 								// or new HashSet<Vector2>
 
 	[Export]
 	private TileMapLayer highlightTilemapLayer;	
@@ -16,27 +16,30 @@ public partial class GridManager : Node
 	[Export]
 	private TileMapLayer baseTerrainTilemapLayer;
 
-	public override void _Ready()
-	{
-	}
 
-	public bool IsTilePositionValid(Vector2 tilePosition)	{
+	public bool IsTilePositionValid(Vector2I tilePosition)	{
+		var customData = baseTerrainTilemapLayer.GetCellTileData(tilePosition);
+
+		if(customData == null) return false;
+		if(!(bool)customData.GetCustomData("buildable")) return false;				// casting customdata as a bool, cause no access from here on its type and it could be many different ones
+
 		return !occupiedCells.Contains(tilePosition);
 	}
 
-	public void MarkTileAsOccupied(Vector2 tilePosition)	{
+	public void MarkTileAsOccupied(Vector2I tilePosition)	{
 		occupiedCells.Add(tilePosition);
 	}
 
-	public void HighlightValidTilesInRadius(Vector2 rootCell, int radius)	{
+	public void HighlightValidTilesInRadius(Vector2I rootCell, int radius)	{
 		ClearHighlightedTiles();
 
 		for (var x = rootCell.X - radius; x <= rootCell.X + radius; x++)
 		{
 			for (var y = rootCell.Y - radius; y <= rootCell.Y + radius; y++)
 			{
-				if(!IsTilePositionValid(new Vector2(x,y))) continue;
-				highlightTilemapLayer.SetCell(new Vector2I((int)x, (int)y), 0, Vector2I.Zero);
+				var tilePosition = new Vector2I(x,y);
+				if(!IsTilePositionValid(tilePosition)) continue;
+				highlightTilemapLayer.SetCell(tilePosition, 0, Vector2I.Zero);
 			}
 		}
 		}
@@ -48,11 +51,11 @@ public partial class GridManager : Node
 
 	
 	// Helper Functions
-	public Vector2 GetMouseGridCellPosition()
+	public Vector2I GetMouseGridCellPosition()
 	{
 		var mousePosition = highlightTilemapLayer.GetGlobalMousePosition();
 		var gridPosition = mousePosition / 64;
 		gridPosition = gridPosition.Floor();
-		return gridPosition;
+		return new Vector2I((int)gridPosition.X, (int)gridPosition.Y);
 	}
 }
