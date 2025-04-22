@@ -3,3 +3,5 @@ res://resources/highlight_tileset.tres
 res://scenes/building/Building.tscn
 res://scenes/Main.cs
 res://resources/tiles.tres
+res://scenes/manager/GridManager.cs
+res://scenes/manager/GridManager.tscn
