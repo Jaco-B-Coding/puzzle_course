@@ -1,3 +1,4 @@
 res://scenes/Main.tscn
 res://resources/highlight_tileset.tres
+res://scenes/building/Building.tscn
 res://scenes/Main.cs
