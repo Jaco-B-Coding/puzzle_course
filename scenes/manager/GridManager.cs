@@ -19,10 +19,12 @@ public partial class GridManager : Node
 	[Export]
 	private TileMapLayer baseTerrainTilemapLayer;
 
+
     public override void _Ready()
     {
-		var  GameEvents = GetNode<GameEvents>("/root/GameEvents");
+		GameEvents.Instance.BuildingPlaced += OnBuildingPlaced;
     }
+
 
 	public bool IsTilePositionValid(Vector2I tilePosition)	{
 		var customData = baseTerrainTilemapLayer.GetCellTileData(tilePosition);
@@ -33,9 +35,11 @@ public partial class GridManager : Node
 		return !occupiedCells.Contains(tilePosition);
 	}
 
+
 	public void MarkTileAsOccupied(Vector2I tilePosition)	{
 		occupiedCells.Add(tilePosition);
 	}
+
 
 	public void HighlightTileBuildableTiles()
 	{
@@ -47,6 +51,7 @@ public partial class GridManager : Node
 				HighlightValidTilesInRadius(buildingComponent.GetGridCellPosition(), buildingComponent.BuildableRadius);	
 			}
 	}
+
 
 	public void ClearHighlightedTiles()
 		{
@@ -77,4 +82,9 @@ public partial class GridManager : Node
 			}
 		}
 		}
+
+	private void OnBuildingPlaced(BuildingComponent buildingComponent)
+	{
+		MarkTileAsOccupied(buildingComponent.GetGridCellPosition());
+	}
 }
