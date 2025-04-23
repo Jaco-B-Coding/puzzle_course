@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using Game.Autoload;
+using Game.Component;
 using Godot;
 
 // grid manager responsible for keeping track of all types thatt can be build and where and for the HighlightTileMapLayer to reflect avalid and updated buildings
@@ -16,6 +19,10 @@ public partial class GridManager : Node
 	[Export]
 	private TileMapLayer baseTerrainTilemapLayer;
 
+    public override void _Ready()
+    {
+		var  GameEvents = GetNode<GameEvents>("/root/GameEvents");
+    }
 
 	public bool IsTilePositionValid(Vector2I tilePosition)	{
 		var customData = baseTerrainTilemapLayer.GetCellTileData(tilePosition);
@@ -30,8 +37,35 @@ public partial class GridManager : Node
 		occupiedCells.Add(tilePosition);
 	}
 
-	public void HighlightValidTilesInRadius(Vector2I rootCell, int radius)	{
+	public void HighlightTileBuildableTiles()
+	{
 		ClearHighlightedTiles();
+		var buildingComponents = GetTree().GetNodesInGroup(nameof(BuildingComponent)).Cast<BuildingComponent>();    //.Cast is a Linq method. iterates over nodes that are returned and casting all to buildingComponent for us  
+		
+		foreach (var buildingComponent in buildingComponents)
+			{
+				HighlightValidTilesInRadius(buildingComponent.GetGridCellPosition(), buildingComponent.BuildableRadius);	
+			}
+	}
+
+	public void ClearHighlightedTiles()
+		{
+			highlightTilemapLayer.Clear();
+		}
+
+	
+	// Helper Methods
+	public Vector2I GetMouseGridCellPosition()
+	{
+		var mousePosition = highlightTilemapLayer.GetGlobalMousePosition();
+		var gridPosition = mousePosition / 64;
+		gridPosition = gridPosition.Floor();
+		return new Vector2I((int)gridPosition.X, (int)gridPosition.Y);
+	}
+
+
+	// private Methods
+	private void HighlightValidTilesInRadius(Vector2I rootCell, int radius)	{
 
 		for (var x = rootCell.X - radius; x <= rootCell.X + radius; x++)
 		{
@@ -43,19 +77,4 @@ public partial class GridManager : Node
 			}
 		}
 		}
-
-	public void ClearHighlightedTiles()
-		{
-			highlightTilemapLayer.Clear();
-		}
-
-	
-	// Helper Functions
-	public Vector2I GetMouseGridCellPosition()
-	{
-		var mousePosition = highlightTilemapLayer.GetGlobalMousePosition();
-		var gridPosition = mousePosition / 64;
-		gridPosition = gridPosition.Floor();
-		return new Vector2I((int)gridPosition.X, (int)gridPosition.Y);
-	}
 }

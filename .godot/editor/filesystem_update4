@@ -5,3 +5,10 @@ res://scenes/Main.cs
 res://resources/tiles.tres
 res://scenes/manager/GridManager.cs
 res://scenes/manager/GridManager.tscn
+res://scenes/building/Base.tscn
+res://scenes/component/BuildingComponents.tscn
+res://scenes/component/BuildingComponents.cs
+res://scenes/component/BuildingComponent.cs
+res://scenes/component/BuildingComponent.tscn
+res://scenes/autoload/GameEvents.cs
+res://scenes/autoload/GameEvents.tscn
