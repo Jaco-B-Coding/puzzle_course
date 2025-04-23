@@ -17,3 +17,6 @@
 - Group is a string value to a key that can be assigned to any number of nodes. Favorable is that the node can then be used from any node without knowing the node path
 
 - Helper functionality for iterating over collection of data.
+
+- .CallDeferred(): is a method that can be called in a deferred function --> it says, call this function after all other GoDot processes are done for this frame. Nice way of saying do this at the end without reorganizing code. Guarantees that game state is all up to date before that deferred method call is made.
+For example to use to update all building positions before storing where the new positions are for the next code iteration
