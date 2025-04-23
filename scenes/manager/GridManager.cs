@@ -19,19 +19,25 @@ public partial class GridManager : Node
 	[Export]
 	private TileMapLayer baseTerrainTilemapLayer;
 
+	private List<TileMapLayer> allTilemapLayers = new();
 
     public override void _Ready()
     {
 		GameEvents.Instance.BuildingPlaced += OnBuildingPlaced;
+		allTilemapLayers = GetAllTilemapLayers(baseTerrainTilemapLayer);
     }
 
 
-	public bool IsTilePositionValid(Vector2I tilePosition)	{
-		var customData = baseTerrainTilemapLayer.GetCellTileData(tilePosition);
-
-		if(customData == null) return false;
-		return (bool)customData.GetCustomData("buildable") ;				// casting customdata as a bool, cause no access from here on its type and it could be many different ones
-
+	public bool IsTilePositionValid(Vector2I tilePosition)	
+	{
+		foreach (var layer in allTilemapLayers)
+		{
+			var customData = layer.GetCellTileData(tilePosition);
+			if(customData == null) continue;
+			return (bool)customData.GetCustomData("buildable") ;				// casting customdata as a bool, cause no access from here on its type and it could be many different ones
+			
+		}
+		return false;
 	}
 
 	public bool IsTilePositionBuildable(Vector2I tilePosition) {
@@ -75,6 +81,23 @@ public partial class GridManager : Node
 		var gridPosition = mousePosition / 64;
 		gridPosition = gridPosition.Floor();
 		return new Vector2I((int)gridPosition.X, (int)gridPosition.Y);
+	}
+
+	private List<TileMapLayer> GetAllTilemapLayers(TileMapLayer rootTileMapLayer)
+	{
+		var result = new List<TileMapLayer>();									//using recursion in this method
+		var children = rootTileMapLayer.GetChildren();
+		children.Reverse();
+
+		foreach (var child in children)
+		{
+			if (child is TileMapLayer childLayer)
+			{
+				result.AddRange(GetAllTilemapLayers(childLayer));				// here comes recursion --> goes down all childmaplayers to the last sub node and returns them one after the other
+			}
+		}
+		result.Add(rootTileMapLayer);
+		return result;
 	}
 
 
