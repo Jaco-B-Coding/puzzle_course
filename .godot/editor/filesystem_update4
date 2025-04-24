@@ -11,3 +11,7 @@ res://scenes/manager/GridManager.cs
 res://scenes/component/BuildingComponent.cs
 res://scenes/building/Village.tscn
 res://scenes/building/Tower.tscn
+res://resources/building/BuildingResource.cs
+res://resources/building/tower.tres
+res://resources/building/base.tres
+res://resources/building/village.tres

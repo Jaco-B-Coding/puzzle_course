@@ -20,3 +20,10 @@
 
 - .CallDeferred(): is a method that can be called in a deferred function --> it says, call this function after all other GoDot processes are done for this frame. Nice way of saying do this at the end without reorganizing code. Guarantees that game state is all up to date before that deferred method call is made.
 For example to use to update all building positions before storing where the new positions are for the next code iteration
+
+- nice way to iterate over a node component  
+var occupiedTiles = buildingComponents.Select(x => x.GetGridCellPosition());  
+foreach ( var existingBuildingComponent in buildingComponents) 
+-->  calls function on component x using the GetGridCellPosition method and iterates over all of the different x(components) and returns, in this case the location of all the placed buildings.
+
+- custom resources creates a text file where we can use to save some configurable data. Good practice especially when storing data on a Node directly causes trouble. We can e.g. create a Resource that contains the resourceComponent "buildable radius" that we can Instantiate when needed

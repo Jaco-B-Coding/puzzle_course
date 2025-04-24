@@ -44,8 +44,7 @@ public partial class GridManager : Node
 		return validBuildableTiles.Contains(tilePosition);
 	}
 
-
-	public void HighlightTileBuildableTiles()
+	public void HighlightBuildableTiles()
 	{
 		foreach (var tilePosition in validBuildableTiles)
 		{
@@ -56,7 +55,7 @@ public partial class GridManager : Node
 	public void HighlightExpandedBuildableTiles(Vector2I rootCell, int radius)
 	{
 		ClearHighlightedTiles();
-		HighlightTileBuildableTiles();
+		HighlightBuildableTiles();
 
 		var validTiles = GetValidTilesInRadius(rootCell, radius).ToHashSet();
 		var expandedTiles = validTiles.Except(validBuildableTiles).Except(GetOccupiedTiles()); 
@@ -104,7 +103,7 @@ public partial class GridManager : Node
 	private void UpdateValidBuildableTiles(BuildingComponent buildingComponent)
 	{
 		var rootCell = buildingComponent.GetGridCellPosition();
-		var validTiles = GetValidTilesInRadius( rootCell, buildingComponent.BuildableRadius);
+		var validTiles = GetValidTilesInRadius( rootCell, buildingComponent.BuildingResource.BuildableRadius);
 		validBuildableTiles.UnionWith(validTiles);
 
 
