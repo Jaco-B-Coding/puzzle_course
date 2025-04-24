@@ -32,6 +32,7 @@ public partial class Main : Node
 
 		placeTowerButton.Pressed += OnPlacedTowerButtonPressed;
 		placeVillageButton.Pressed += OnPlacedVillageButtonPressed;
+		gridManager.ResourceTilesUpdated += OnResourceTilesUpdated;
 
 	}
 
@@ -86,4 +87,8 @@ public partial class Main : Node
 
 	}
 
+	private void OnResourceTilesUpdated(int resourceCount)
+	{
+		GD.Print(resourceCount);
+	}
 }
