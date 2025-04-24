@@ -9,3 +9,5 @@ res://scenes/autoload/GameEvents.cs
 res://scenes/Main.cs
 res://scenes/manager/GridManager.cs
 res://scenes/component/BuildingComponent.cs
+res://scenes/building/Village.tscn
+res://scenes/building/Tower.tscn
