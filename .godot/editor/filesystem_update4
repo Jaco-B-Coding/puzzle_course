@@ -15,3 +15,5 @@ res://resources/building/BuildingResource.cs
 res://resources/building/tower.tres
 res://resources/building/base.tres
 res://resources/building/village.tres
+res://scenes/UI/GameUI.tscn
+res://scenes/UI/GameUI.cs

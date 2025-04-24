@@ -1,3 +1,5 @@
+HBoxContainer
+MarginContainer
 Sprite2D
 Node2D
 TileMapLayer
