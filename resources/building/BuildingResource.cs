@@ -6,6 +6,8 @@ namespace Game.Resources.Building;
 public partial class BuildingResource : Resource 					// extend to resource so we have a custom GoDot resource declared here
 {
 	[Export]
+	public string DisplayName { get; private set; }
+	[Export]
 	public int BuildableRadius { get; private set;	}
 	[Export]
 	public int ResourceRadius { get; private set; }

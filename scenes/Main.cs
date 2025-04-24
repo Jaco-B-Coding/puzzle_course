@@ -9,8 +9,6 @@ public partial class Main : Node
 {
 	private GridManager gridManager;
 	private Sprite2D cursor;
-	private BuildingResource towerResource;
-	private BuildingResource villageResource;
 	private Node2D ySortRoot;
 	private GameUI gameUI;
 
@@ -20,8 +18,6 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		towerResource = GD.Load<BuildingResource>("res://resources/building/tower.tres");
-		villageResource = GD.Load<BuildingResource>("res://resources/building/village.tres");
 		gridManager = GetNode<GridManager>("GridManager");
 		cursor = GetNode<Sprite2D>("Cursor");
 		ySortRoot = GetNode<Node2D>("YSortRoot");
@@ -30,8 +26,7 @@ public partial class Main : Node
 
 		gameUI = GetNode<GameUI>("GameUI");
 
-		gameUI.PlaceTowerButtonPressed += OnPlacedTowerButtonPressed;
-		gameUI.PlaceVillageButtonPressed += OnPlacedVillageButtonPressed;
+		gameUI.BuildingResourceSelected += OnBuildingResourceSelected;
 		gridManager.ResourceTilesUpdated += OnResourceTilesUpdated;
 
 	}
@@ -73,18 +68,11 @@ public partial class Main : Node
 	}
 
 
-	private void OnPlacedTowerButtonPressed()
+	private void OnBuildingResourceSelected(BuildingResource buildingResource)
 	{
-		toPlaceBuildingResource = towerResource;
+		toPlaceBuildingResource = buildingResource;
 		cursor.Visible = true;
 		gridManager.HighlightBuildableTiles();
-	}
-
-	private void OnPlacedVillageButtonPressed() {
-		toPlaceBuildingResource = villageResource;
-		cursor.Visible = true;
-		gridManager.HighlightBuildableTiles();
-
 	}
 
 	private void OnResourceTilesUpdated(int resourceCount)

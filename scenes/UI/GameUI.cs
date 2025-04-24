@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using Game.Resources.Building;
 using Godot;
 
 namespace Game.UI;
@@ -6,30 +7,34 @@ namespace Game.UI;
 public partial class GameUI : MarginContainer
 {
 	[Signal]
-	public delegate void PlaceTowerButtonPressedEventHandler();
-	[Signal]
-	public delegate void PlaceVillageButtonPressedEventHandler();
+	public delegate void BuildingResourceSelectedEventHandler(BuildingResource buildingResource);
 
-	private Button placeTowerButton;
-	private Button placeVillageButton;
+	private HBoxContainer hBoxContainer;
 
-		public override void _Ready()
+	[Export]
+	private BuildingResource[] buildingResources;
+
+	
+
+	public override void _Ready()
+	{
+		hBoxContainer = GetNode<HBoxContainer>("HBoxContainer");
+		CreateBuildingButtons();
+	}
+		
+	private void CreateBuildingButtons()
+	{
+		foreach (var buildingResource in buildingResources)
 		{
-			
-			placeTowerButton = GetNode<Button>("%PlaceTowerButton");		
-			placeVillageButton = GetNode<Button>("%PlaceVillageButton");
+			var buildingButton = new Button();						
+			buildingButton.Text = $"Place {buildingResource.DisplayName}";
+			hBoxContainer.AddChild(buildingButton);
 
-			placeTowerButton.Pressed += OnPlaceTowerButtonPressed;
-			placeVillageButton.Pressed += OnPlaceVillageButtonPressed;
+			buildingButton.Pressed += () => 
+			{
+				EmitSignal(SignalName.BuildingResourceSelected, buildingResource);
+			};
 		}
-
-	private void OnPlaceTowerButtonPressed()
-	{
-		EmitSignal(SignalName.PlaceTowerButtonPressed);
 	}
 
-	private void OnPlaceVillageButtonPressed()
-	{
-		EmitSignal(SignalName.PlaceVillageButtonPressed);
-	}
 }
