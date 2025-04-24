@@ -30,7 +30,7 @@ tile_map_data = PackedByteArray("AAAFAAYAAQAAAAAAAAAJAAMAAQAAAAAAAAAMAAUAAQAAAAA
 tile_set = ExtResource("2_0bbpv")
 
 [node name="Base" parent="YSortRoot" instance=ExtResource("5_vcsgt")]
-position = Vector2(384, 128)
+position = Vector2(448, 256)
 
 [node name="HighlightTileMapLayer" type="TileMapLayer" parent="."]
 modulate = Color(1, 1, 1, 0.478431)
