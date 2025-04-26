@@ -1,4 +1,6 @@
+using System.Linq;
 using Game.Building;
+using Game.Component;
 using Game.Resources.Building;
 using Game.UI;
 using Godot;
@@ -126,7 +128,14 @@ public partial class BuildingManager : Node
 
 	private void DestroyBuildingAtHoveredCellPosition()
 	{
+		var buildingComponent = GetTree().GetNodesInGroup(nameof(BuildingComponent)).Cast<BuildingComponent>()
+			.FirstOrDefault((buildingComponent) => buildingComponent.GetGridCellPosition() == hoveredGridCell);					// returns first element in list of Buildingcomponents where te BuildinmgCompnent Element has the position equal to the frid cell
 
+		if (buildingComponent == null) return;
+
+		currentlyUsedResourceCount -= buildingComponent.BuildingResource.ResourceCost;
+		buildingComponent.Destroy();
+		
 	}
 
 	private void ClearBuildingGhost()
@@ -138,7 +147,6 @@ public partial class BuildingManager : Node
 			}
 		buildingGhost = null;
 	}
-
 	private bool IsBuildingPlaceableAtTile(Vector2I tilePosition)
 	{
 		return 	gridManager.IsTilePositionBuildable(tilePosition) &&

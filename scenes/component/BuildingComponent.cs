@@ -17,7 +17,7 @@ public partial class BuildingComponent : Node2D
 		{
 			BuildingResource = GD.Load<BuildingResource>(buildingResourcePath);
 		}
-		AddToGroup(nameof(BuildingComponent)); 							// since already added here t the Group it is gonna be synchronized in any other call to it
+		AddToGroup(nameof(BuildingComponent)); 							// since already added here to the Group it is gonna be synchronized in any other call to it
 		Callable.From(() => GameEvents.EmitBuildingPlaced(this)).CallDeferred();		// defined lambda functions that when called calls EmitBuildingPlaced funcitons --> Object type that wraps a C# functions, as they cannot be passed to Godot in raw form
 	}
 
@@ -26,6 +26,12 @@ public partial class BuildingComponent : Node2D
 		var gridPosition = GlobalPosition / 64;
 		gridPosition = gridPosition.Floor();
 		return new Vector2I((int)gridPosition.X, (int)gridPosition.Y);
+	}
+
+	public void Destroy()
+	{
+		GameEvents.EmitBuildingDestroyed(this);
+		Owner.QueueFree(); 						//owner is the root node of the scene 
 	}
 
 }
