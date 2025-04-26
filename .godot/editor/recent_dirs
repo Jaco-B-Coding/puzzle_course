@@ -1,8 +1,9 @@
+res://scenes/building/sprite
+res://scenes/building
 res://scenes/manager
 res://scenes/UI
 res://resources/building
 res://resources/building/
-res://scenes/building
 res://scenes/autoload
 res://scenes/component
 res://resources/

@@ -15,4 +15,6 @@ public partial class BuildingResource : Resource 					// extend to resource so w
 	public int ResourceRadius { get; private set; }
 	[Export]
 	public PackedScene BuildingScene { get; private set; }
+	[Export]
+	public PackedScene SpriteScene {get ; private set;}
 }

@@ -11,3 +11,9 @@ res://scenes/UI/GameUI.cs
 res://scenes/manager/BuildingManager.tscn
 res://scenes/Main.tscn
 res://resources/building/village.tres
+res://scenes/UI/GameUI.tscn
+res://scenes/building/BuildingGhost.tscn
+res://scenes/building/Tower.tscn
+res://scenes/building/Village.tscn
+res://scenes/building/sprite/VillageSprite2D.tscn
+res://scenes/building/sprite/TowerSprite2D.tscn

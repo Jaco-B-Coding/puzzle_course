@@ -13,7 +13,7 @@ public partial class BuildingManager : Node
 	[Export]
     private Node2D ySortRoot;
 	[Export]
-	private Node2D cursor;
+	private PackedScene buildingGhostScene;
 
 
 	private int currentResourceCount;
@@ -21,9 +21,9 @@ public partial class BuildingManager : Node
 	private int currentlyUsedResourceCount;
 	private BuildingResource toPlaceBuildingResource;
 	private Vector2I? hoveredGridCell;
+	private Node2D buildingGhost;
 
 	private int AvailableResourceCount => (startingResourceCount + currentResourceCount)- currentlyUsedResourceCount;
-
 
 
 	public override void _Ready()
@@ -42,16 +42,18 @@ public partial class BuildingManager : Node
 		AvailableResourceCount >= toPlaceBuildingResource.ResourceCost)
 		{
 			PlaceBuildingAtHoveredCellPosition();
-			cursor.Visible = false;
+
 		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (!IsInstanceValid(buildingGhost)) return;
+
 		var gridPosition = gridManager.GetMouseGridCellPosition();
-		cursor.GlobalPosition = gridPosition * 64;
-		if (toPlaceBuildingResource != null && cursor.Visible && (!hoveredGridCell.HasValue || hoveredGridCell.Value != gridPosition))
+		buildingGhost.GlobalPosition = gridPosition * 64;
+		if (toPlaceBuildingResource != null && (!hoveredGridCell.HasValue || hoveredGridCell.Value != gridPosition))
 		{
 			hoveredGridCell = gridPosition;
 			gridManager.ClearHighlightedTiles();
@@ -73,8 +75,8 @@ public partial class BuildingManager : Node
 		gridManager.ClearHighlightedTiles();
 
 		currentlyUsedResourceCount += toPlaceBuildingResource.ResourceCost;
-
-		GD.Print(AvailableResourceCount);
+		buildingGhost.QueueFree();												// frees a Node after all of GoDot operations are finished. Deletes the node after placing the building at current position
+		buildingGhost = null;
 	}
 
 	private void OnResourceTilesUpdated( int resourceCount)
@@ -85,8 +87,18 @@ public partial class BuildingManager : Node
 
 	private void OnBuildingResourceSelected(BuildingResource buildingResource)
 	{
+		if (IsInstanceValid(buildingGhost)) 
+		{
+			buildingGhost.QueueFree();											// reinstantiate node after we fred it before
+		}
+
+		buildingGhost = buildingGhostScene.Instantiate<Node2D>();
+		ySortRoot.AddChild(buildingGhost);
+
+		var buildingSprite = buildingResource.SpriteScene.Instantiate<Sprite2D>();
+		buildingGhost.AddChild(buildingSprite); 
+
 		toPlaceBuildingResource = buildingResource;
-		cursor.Visible = true;
 		gridManager.HighlightBuildableTiles();
 	}
 
