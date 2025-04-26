@@ -60,8 +60,6 @@ public partial class GridManager : Node
 
 	public void HighlightExpandedBuildableTiles(Vector2I rootCell, int radius)
 	{
-		HighlightBuildableTiles();
-
 		var validTiles = GetValidTilesInRadius(rootCell, radius).ToHashSet();
 		var expandedTiles = validTiles.Except(validBuildableTiles).Except(GetOccupiedTiles()); 
 		var atlasCoords = new Vector2I(1,0);
@@ -122,7 +120,7 @@ public partial class GridManager : Node
 		validBuildableTiles.ExceptWith(GetOccupiedTiles());									// removes occupied tiles from validBuildableTile Hashset
 	}
 
-	private void UpdateCollectedResoureTiles(BuildingComponent buildingComponent)
+	private void UpdateCollectedResourceTiles(BuildingComponent buildingComponent)
 	{
 		var rootCell = buildingComponent.GetGridCellPosition();
 		var resourceTiles = GetResourceTilesInRadius(rootCell, buildingComponent.BuildingResource.ResourceRadius);
@@ -177,6 +175,6 @@ public partial class GridManager : Node
 	private void OnBuildingPlaced(BuildingComponent buildingComponent)
 	{
 		UpdateValidBuildableTiles(buildingComponent);
-		UpdateCollectedResoureTiles(buildingComponent);
+		UpdateCollectedResourceTiles(buildingComponent);
 	}
 }
