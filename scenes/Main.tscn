@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://bipxsk1snp5nq"]
+[gd_scene load_steps=9 format=4 uid="uid://bipxsk1snp5nq"]
 
 [ext_resource type="Script" uid="uid://di23qqsj61257" path="res://scenes/Main.cs" id="1_oetcv"]
 [ext_resource type="TileSet" uid="uid://dbv0swlbfaaf4" path="res://resources/tiles.tres" id="2_0bbpv"]
 [ext_resource type="TileSet" uid="uid://be2deub8k3gjr" path="res://resources/highlight_tileset.tres" id="2_8gl76"]
+[ext_resource type="PackedScene" uid="uid://cqq6mhyl7o8gf" path="res://scenes/manager/BuildingManager.tscn" id="2_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://bbb0h86pe6dpg" path="res://scenes/manager/GridManager.tscn" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://mgsfjpmdu6up" path="res://scenes/building/Base.tscn" id="5_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://j8h2ypmei44y" path="res://scenes/UI/GameUI.tscn" id="6_c01mt"]
@@ -12,6 +13,12 @@ size = Vector2(64, 64)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_oetcv")
+
+[node name="BuildingManager" parent="." node_paths=PackedStringArray("gridManager", "gameUI", "ySortRoot", "cursor") instance=ExtResource("2_nxtc6")]
+gridManager = NodePath("../GridManager")
+gameUI = NodePath("../GameUI")
+ySortRoot = NodePath("../YSortRoot")
+cursor = NodePath("../Cursor")
 
 [node name="GridManager" parent="." node_paths=PackedStringArray("highlightTilemapLayer", "baseTerrainTilemapLayer") instance=ExtResource("4_rarhs")]
 highlightTilemapLayer = NodePath("../HighlightTileMapLayer")
@@ -31,7 +38,7 @@ tile_map_data = PackedByteArray("AAAFAAYAAQAAAAAAAAAJAAMAAQAAAAAAAAAMAAUAAQAAAAA
 tile_set = ExtResource("2_0bbpv")
 
 [node name="Base" parent="YSortRoot" instance=ExtResource("5_vcsgt")]
-position = Vector2(448, 256)
+position = Vector2(512, 256)
 
 [node name="HighlightTileMapLayer" type="TileMapLayer" parent="."]
 modulate = Color(1, 1, 1, 0.478431)
