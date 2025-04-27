@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PuzzleCourse"
-run/main_scene="uid://b8rs3jvm1ix5j"
+run/main_scene="uid://dw5mb7axkx4du"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

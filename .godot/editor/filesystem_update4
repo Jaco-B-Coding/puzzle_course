@@ -22,3 +22,5 @@ res://scenes/GoldMine.cs
 res://scenes/Level/BaseLevel.tscn
 res://scenes/level/Level1.tscn
 res://scenes/level/BaseLevel.tscn
+res://scenes/BaseLevel.cs
+res://scenes/level/BaseLevel.cs
