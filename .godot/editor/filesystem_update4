@@ -19,3 +19,6 @@ res://scenes/UI/GameUI.cs
 res://resources/building/BuildingResource.cs
 res://scenes/component/BuildingComponent.cs
 res://scenes/GoldMine.cs
+res://scenes/Level/BaseLevel.tscn
+res://scenes/level/Level1.tscn
+res://scenes/level/BaseLevel.tscn
