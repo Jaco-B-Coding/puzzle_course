@@ -1,8 +1,10 @@
-res://scenes/manager/BuildingManager.cs
-res://scenes/Main.tscn
 res://resources/tiles.tres
 res://resources/highlight_tileset.tres
 res://resources/building/tower.tres
+res://scenes/GoldMine.tscn
+res://scenes/Main.cs
+res://scenes/manager/GridManager.cs
+res://scenes/Main.tscn
 res://scenes/manager/BuildingManager.tscn
 res://scenes/UI/GameUI.tscn
 res://scenes/building/BuildingGhost.tscn
@@ -11,9 +13,9 @@ res://scenes/building/Village.tscn
 res://scenes/building/sprite/VillageSprite2D.tscn
 res://scenes/building/sprite/TowerSprite2D.tscn
 res://scenes/autoload/GameEvents.cs
-res://scenes/manager/GridManager.cs
-res://scenes/component/BuildingComponent.cs
+res://scenes/manager/BuildingManager.cs
+res://scenes/building/BuildingGhost.cs
 res://scenes/UI/GameUI.cs
 res://resources/building/BuildingResource.cs
-res://scenes/Main.cs
-res://scenes/building/BuildingGhost.cs
+res://scenes/component/BuildingComponent.cs
+res://scenes/GoldMine.cs
