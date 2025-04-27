@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PuzzleCourse")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a17659048d5066d47ab5ebdd85add33f79505e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48435c7147359abba8c51b25126706584a7f6d54")]
 [assembly: System.Reflection.AssemblyProductAttribute("PuzzleCourse")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PuzzleCourse")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
