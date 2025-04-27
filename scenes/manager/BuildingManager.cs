@@ -105,7 +105,7 @@ public partial class BuildingManager : Node
 		if(IsBuildingPlaceableAtTile(hoveredGridCell))
 		{
 			gridManager.HighlightExpandedBuildableTiles(hoveredGridCell, toPlaceBuildingResource.BuildableRadius);
-			gridManager.HighlightRresourceTiles(hoveredGridCell, toPlaceBuildingResource.ResourceRadius);
+			gridManager.HighlightResourceTiles(hoveredGridCell, toPlaceBuildingResource.ResourceRadius);
 			buildingGhost.SetValid();
 		}
 		else
@@ -134,6 +134,7 @@ public partial class BuildingManager : Node
 		if (buildingComponent == null) return;
 
 		currentlyUsedResourceCount -= buildingComponent.BuildingResource.ResourceCost;
+		
 		buildingComponent.Destroy();
 		
 	}

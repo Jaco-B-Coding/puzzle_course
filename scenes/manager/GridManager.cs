@@ -73,7 +73,7 @@ public partial class GridManager : Node
 			}
 	}
 
-	public void HighlightRresourceTiles(Vector2I rootCell, int radius)
+	public void HighlightResourceTiles(Vector2I rootCell, int radius)
 	{
 		var resourceTiles = GetResourceTilesInRadius(rootCell, radius);
 		var atlasCoords = new Vector2I(1,0);
@@ -146,6 +146,7 @@ public partial class GridManager : Node
 		EmitSignal(SignalName.GridStateUpdated);
 
 	}
+	
 	private void RecalculateGrid(BuildingComponent exludeBuildingComponent)
 	{
 		occupiedTiles.Clear();
