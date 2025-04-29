@@ -27,3 +27,5 @@ foreach ( var existingBuildingComponent in buildingComponents)
 -->  calls function on component x using the GetGridCellPosition method and iterates over all of the different x(components) and returns, in this case the location of all the placed buildings.
 
 - custom resources creates a text file where we can use to save some configurable data. Good practice especially when storing data on a Node directly causes trouble. We can e.g. create a Resource that contains the resourceComponent "buildable radius" that we can Instantiate when needed
+
+- square root calcutaions are CPU intensive and should be avoided if possible

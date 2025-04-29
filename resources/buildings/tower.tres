@@ -1,15 +1,16 @@
 [gd_resource type="Resource" script_class="BuildingResource" load_steps=4 format=3 uid="uid://b5c3c0gpqvluc"]
 
 [ext_resource type="PackedScene" uid="uid://bkk040smvshyh" path="res://scenes/building/Tower.tscn" id="1_55ps4"]
-[ext_resource type="Script" uid="uid://dpc0tyqcn3jyl" path="res://resources/building/BuildingResource.cs" id="1_w0kxv"]
+[ext_resource type="Script" uid="uid://dpc0tyqcn3jyl" path="res://resources/buildings/BuildingResource.cs" id="1_w0kxv"]
 [ext_resource type="PackedScene" uid="uid://cw8w5wwpdo0nv" path="res://scenes/building/sprite/TowerSprite2D.tscn" id="2_q53hc"]
 
 [resource]
 script = ExtResource("1_w0kxv")
 DisplayName = "Tower"
+IsDeletable = true
 Dimensions = Vector2i(2, 2)
 ResourceCost = 4
-BuildableRadius = 3
+BuildableRadius = 6
 ResourceRadius = 0
 BuildingScene = ExtResource("1_55ps4")
 SpriteScene = ExtResource("2_q53hc")

@@ -19,3 +19,5 @@ res://scenes/component/BuildingComponent.cs
 res://scenes/level/BaseLevel.cs
 res://scenes/manager/BuildingManager.cs
 res://scenes/UI/GameUI.cs
+res://resources/buildings/tower.tres
+res://resources/buildings/base.tres

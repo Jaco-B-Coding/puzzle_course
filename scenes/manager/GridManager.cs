@@ -60,14 +60,7 @@ public partial class GridManager : Node
 
 	public bool IsTileAreaBuildable(Rect2I tileArea)
 	{
-		var tiles = new List<Vector2I>();
-		for( int x = tileArea.Position.X; x < tileArea.End.X; x++)
-		{
-				for (int y = tileArea.Position.Y; y < tileArea.End.Y; y++)
-				{
-					tiles.Add(new Vector2I(x,y));
-				}
-		}
+		var tiles = tileArea.ToTiles(); 			// extension method to GoDot clas 
 
 		if (tiles.Count == 0) return false;			// saftey check
 		(TileMapLayer firsTileMapLayer, _) = GetTileCustomData(tiles[0], IS_BUILDABLE);			// getting the first tilemaplayer the tile belongs to; discard the second tuple value
@@ -215,17 +208,27 @@ public partial class GridManager : Node
 		EmitSignal(SignalName.GridStateUpdated);
 	}
 
+	private bool IsTileInsideCircle(Vector2 centerPosition, Vector2 tilePosition, float radius)
+	{
+		var distanceX = centerPosition.X - tilePosition.X + .5;
+		var distanceY = centerPosition.Y - tilePosition.Y + .5;
+		var distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+		return distanceSquared <= radius*radius;
+	}
 
 	private List<Vector2I> GetTilesInRadius(Rect2I tileArea, int radius, Func<Vector2I, bool> filterFn)   // passing function as filter functionIS_BUILDABLE which returns boolean and accepts in this case a Vector2I as input
 	{
 		var result = new List<Vector2I>();
+		var tileAreaF = tileArea.ToRect2F();			// we need to change the Rect2I to Rect2, as GetCenter chops of decimals for integer values
+		var tileAreaCenter = tileAreaF.GetCenter();
+		var radiusMod = Mathf.Max(tileAreaF.Size.X, tileAreaF.Size.Y)/2;
 
 		for (var x = tileArea.Position.X - radius; x < tileArea.End.X + radius; x++)
 		{
 			for (var y = tileArea.Position.Y - radius; y < tileArea.End.Y + radius; y++)
 			{
 				var tilePosition = new Vector2I(x,y);
-				if(!filterFn(tilePosition)) continue;
+				if(!IsTileInsideCircle(tileAreaCenter, tilePosition, radius + radiusMod) || !filterFn(tilePosition)) continue;
 				result.Add(tilePosition);
 			}
 		}
