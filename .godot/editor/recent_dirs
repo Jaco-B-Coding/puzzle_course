@@ -1,3 +1,5 @@
+res://resources
+res://resources/
 res://scenes/level/util
 res://scenes/level
 res://scenes
@@ -7,4 +9,3 @@ res://scenes/manager
 res://scenes/UI
 res://scenes/autoload
 res://scenes/component
-res://resources/
