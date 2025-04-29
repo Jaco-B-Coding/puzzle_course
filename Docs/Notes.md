@@ -29,3 +29,7 @@ foreach ( var existingBuildingComponent in buildingComponents)
 - custom resources creates a text file where we can use to save some configurable data. Good practice especially when storing data on a Node directly causes trouble. We can e.g. create a Resource that contains the resourceComponent "buildable radius" that we can Instantiate when needed
 
 - square root calcutaions are CPU intensive and should be avoided if possible
+
+- **Font Sizing**: When apllying Font type and importing it to GoDot, when using pixel fonts change the fonts setting to the following. This ensures criper letters: ![alt text](image-1.png)
+
+- Careful when copying or duplicating in GoDot as it creates a shared reference to the copied object. To remove this reference, one then has to select the "Make unique" option
