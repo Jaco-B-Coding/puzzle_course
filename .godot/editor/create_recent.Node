@@ -1,7 +1,8 @@
+TileMapLayer
+Label
+VBoxContainer
 Button
 PanelContainer
-VBoxContainer
-TileMapLayer
 CanvasLayer
 Node2D
 Node
