@@ -1,12 +1,13 @@
-TileMapLayer
-Label
+HBoxContainer
 VBoxContainer
+Label
+Node
+TextureRect
+TileMapLayer
 Button
 PanelContainer
 CanvasLayer
 Node2D
-Node
 Camera2D
 Sprite2D
-HBoxContainer
 MarginContainer
